@@ -3,7 +3,9 @@ import time
 import openai
 import docstring_parser
 from openai.types.beta.threads.run import Run
-from data.config import OPENAI_API_KEY, MODEL, AssistantID
+from data.config import MODEL
+from data.config2 import OPENAI_API_KEY, AssistantID
+# create file with name data/config2.py ( OPENAI_API_KEY="" and AssistantID="" )
 
 
 class Agent:
