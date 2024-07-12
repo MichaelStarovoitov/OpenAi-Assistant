@@ -3,24 +3,43 @@ import time
 import openai
 import docstring_parser
 from openai.types.beta.threads.run import Run
-from data.config import MODEL, OPENAI_API_KEY, AssistantID
-# add to file with name data/config.py ( OPENAI_API_KEY  and AssistantID )
+from data.config import MODEL
+from data.config2 import OPENAI_API_KEY, AssistantID
+# create file with name data/config2.py ( OPENAI_API_KEY="" and AssistantID="" )
 
 
-class createOpenAi:
-    def __init__(self, name: str,  personality: str, tools: dict[str, callable], allData):
+class Agent:
+    def __init__(self, name: str, personality: str, tools: dict[str, callable], allData):
         self.name = name
         self.personality = personality
         self.tool_belt = tools
         self.allData = allData
         self.client = openai.OpenAI(api_key=OPENAI_API_KEY)
-
-    def _createAssistant(self, assistantId, model):
+        self.createAssistant(AssistantID, MODEL)
+        
+    def createAssistant(self, assistantId, model):
         if len(assistantId) > 0:
             self.assistant = self.client.beta.assistants.retrieve(assistantId)  
         else:
             self.assistant = self.client.beta.assistants.create( name=self.name, model=model )
-    
+
+    def create_thread(self):
+        self.thread = self.client.beta.threads.create()
+
+    def add_message(self, message):
+        self.allData.search_json_with_similarity(message)
+        print("done")
+        self.client.beta.threads.messages.create(
+            thread_id=self.thread.id,
+            role="user",
+            content=message
+        )
+
+    def get_last_message(self):
+        return self.client.beta.threads.messages.list(
+            thread_id=self.thread.id
+        ).data[0].content[0].text.value
+
     def _get_tools_in_open_ai_format(self):
         python_type_to_json_type = {
             "str": "string",
@@ -120,29 +139,6 @@ class createOpenAi:
             if elapsed_time > 120:  # 2 minutes
                 self._cancel_run(run)
                 raise Exception("Run took longer than 2 minutes.")
-
-
-class Agent(createOpenAi):
-    def __init__(self, name: str, personality: str, tools: dict[str, callable], allData):
-        super().__init__(name, personality, tools, allData)
-        self._createAssistant(AssistantID, MODEL)
-        
-    def create_thread(self):
-        self.thread = self.client.beta.threads.create()
-
-    def add_message(self, message):
-        self.allData.search_json_with_similarity(message)
-        print("done")
-        self.client.beta.threads.messages.create(
-            thread_id=self.thread.id,
-            role="user",
-            content=message
-        )
-
-    def get_last_message(self):
-        return self.client.beta.threads.messages.list(
-            thread_id=self.thread.id
-        ).data[0].content[0].text.value
 
     def run_agent(self):
         run = self._create_run()
