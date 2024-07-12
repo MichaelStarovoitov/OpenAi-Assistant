@@ -2,7 +2,7 @@ import telebot
 from data.config import TOKEN, pattern
 from data.db import Data
 from components.agent import Agent
-from components.textTools import get_simple_markdown # get_simple_markdown
+from components.textTools import get_simple_markdown
 from components.tools import get_product_info, tell_about_contacts, tell_about_delivAndPayment
 import Levenshtein
 
