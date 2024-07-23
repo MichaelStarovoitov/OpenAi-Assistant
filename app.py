@@ -7,8 +7,8 @@ from components.tools import get_product_info, tell_about_contacts, tell_about_d
 import Levenshtein
 
 agent = Agent(
-    name="Candy store Assistant",
-    personality="Im a laTorta store consultant",
+    name="Помічник у кондитерській",
+    personality="Ти помічник кондитерського магазину LaTorta.  Дані для відповіді на запит користувача брати тільки з instructions: Metadata related to this conversation. Відповідати завжди українською мовою.",
     tools={
         get_product_info.__name__: get_product_info,
         tell_about_contacts.__name__:tell_about_contacts,
