@@ -1,5 +1,6 @@
 from components.loadData import load_data
 from fuzzywuzzy import fuzz, process
+from components.textTools import text_translator
 
 class Data:
     def __init__(self, path):
@@ -16,27 +17,12 @@ class Data:
     def getDelivAndPay(self):
         return self.delivAndPay
     def getSortProduct(self):
-        if len(self.sortProduct) > 10:
-           return self.sortProduct[0:10]
-        else:
-            return self.sortProduct
-
-    # Tmp function
-    # def search_json_with_similarity(self, query, fields=None, threshold=70, max_results=10):
-    #     results = []
-    #     product_strings = []
-    #     for entry in self.products:
-    #         for key, value in entry.items():
-    #             if fields and key not in fields:
-    #                 continue
-    #             if isinstance(value, str) and fuzz.partial_ratio(query.lower(), value.lower()) > threshold:
-    #                 results.append(entry)
-    #                 product_strings.append(value)
-    #                 break
-    #     extracted = process.extract(query, product_strings, scorer=fuzz.partial_ratio, limit=max_results)
-    #     indices = [product_strings.index(item[0]) for item in extracted]
-    #     self.sortProduct = [results[idx] for idx in indices]
-
+        result = self.sortProduct[0:10]
+        for el in result:
+            el['name'] = text_translator(el['name'])
+            el['description'] = text_translator(el['description'])
+        return result
+    
     def search_json_with_similarity(self,query, threshold=70):
         matches = []
         for obj in self.products:
