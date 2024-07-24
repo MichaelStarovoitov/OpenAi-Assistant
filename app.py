@@ -1,10 +1,12 @@
 import telebot
 from data.config import TOKEN, pattern
-from data.db import Data
+from components.db import Data
 from components.agent import Agent
 from components.textTools import get_simple_markdown
 from components.tools import get_product_info, tell_about_contacts, tell_about_delivAndPayment
 import Levenshtein
+
+print("agent")
 
 agent = Agent(
     name="Помічник у кондитерській",
@@ -14,7 +16,7 @@ agent = Agent(
         tell_about_contacts.__name__:tell_about_contacts,
         tell_about_delivAndPayment.__name__:tell_about_delivAndPayment
     },
-    allData=Data(path='./data/ResultFile.json')
+    allData=Data(path='./data/Result/ResultFile.json')
 )
 bot = telebot.TeleBot(TOKEN)
 agent.create_thread()
