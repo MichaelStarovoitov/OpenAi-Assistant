@@ -6,7 +6,7 @@ from components.textTools import get_simple_markdown
 from components.tools import get_product_info, tell_about_contacts, tell_about_delivAndPayment
 import Levenshtein
 
-print("agent")
+print("agent Start")
 
 agent = Agent(
     name="Помічник у кондитерській",

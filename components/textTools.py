@@ -1,5 +1,5 @@
 import re
-# from googletrans import Translator
+from deep_translator import GoogleTranslator
 
 
 def convert_to_markdown(text):
@@ -30,10 +30,5 @@ def get_simple_markdown(pattern, text):
     return re.sub(r'\*(.*?)\*', r'**\1**', re.sub(pattern, '', text))
 
 def text_translator(text='', src='ru', dest='uk'):
-    # try:
-    #     translator = Translator()
-    #     newText = translator.translate(text=text,src=src, dest=dest )
-    #     return newText.text
-    # except Exception as ex:
-    #     return text
-    return text
+    translator = GoogleTranslator(source=src, target=dest)
+    return translator.translate(text)

@@ -25,7 +25,6 @@ class Data:
     
     def search_json_with_similarity(self,query, threshold=70):
         query = text_translator(query,"uk", "ru")
-        print(query)
         matches = []
         for obj in self.products:
             name_similarity = fuzz.partial_ratio(query.lower(), obj['name'].lower())

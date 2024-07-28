@@ -132,7 +132,6 @@ class Agent(parentAgent):
 
     def add_message(self, message):
         self.allData.search_json_with_similarity(message)
-        print("done")
         self.client.beta.threads.messages.create(
             thread_id=self.thread.id,
             role="user",
