@@ -1,0 +1,11 @@
+__pycache__/
+*.docx
+appTest.py
+data/config2.txt
+venv/
+backUp/
+*.json
+*.csv
+!ResultFile.json
+tempCodeRunnerFile.py
+.env
