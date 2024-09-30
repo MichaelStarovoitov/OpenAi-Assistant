@@ -2,14 +2,17 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 AssistantID = os.getenv("AssistantID")
 MODEL = "gpt-4-turbo-preview"
 
-
 TOKEN = os.getenv("TOKEN")
 pattern = r'【\d+:\d+†[^】]+】'
+
+parent_dir = os.path.dirname(os.path.abspath(__file__))
+
+resultFile = os.path.join(parent_dir, 'Result', "ResultFile.json")
+rootPath = os.path.join(parent_dir, 'Result', "")
 
 nameBot = 'Помічник у кондитерській'
 propt = '''
@@ -21,3 +24,4 @@ propt = '''
 «Ми можемо надрукувати будь-яку картинку за вашим бажанням. Для цього зверніться до менеджера з друку.»,
 також пропонувати готові картинки, які є в наявності на сайті та завжди пропонувати власний друк на вафельному або цукровому папері
 '''
+

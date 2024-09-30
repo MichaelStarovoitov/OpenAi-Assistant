@@ -57,6 +57,6 @@ class Data:
         related_products_indices = cosine_similarities.argsort()[::-1]
         
         # Берем от 1 до 10 наиболее подходящих продуктов
-        top_indices = related_products_indices[:10]
+        top_indices = related_products_indices[:max_results]
         # Вернем только продукты с ненулевым сходством
         self.sortProduct = [self.products[i] for i in top_indices if cosine_similarities[i] > 0] 

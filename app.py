@@ -1,5 +1,5 @@
 import telebot
-from data.config import TOKEN, pattern, propt, nameBot
+from data.config import TOKEN, pattern, propt, nameBot, resultFile
 from components.db import Data
 from components.agent import Agent
 from components.textTools import get_simple_markdown
@@ -16,7 +16,7 @@ agent = Agent(
         tell_about_contacts.__name__:tell_about_contacts,
         tell_about_delivAndPayment.__name__:tell_about_delivAndPayment
     },
-    allData=Data(path='./data/Result/ResultFile.json')
+    allData=Data(path=resultFile)
 )
 print("agent Start")
 bot = telebot.TeleBot(TOKEN)

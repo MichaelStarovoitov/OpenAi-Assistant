@@ -4,7 +4,6 @@ import openai
 import docstring_parser
 from openai.types.beta.threads.run import Run
 from data.config import MODEL, OPENAI_API_KEY, AssistantID
-# add to file with name data/config2.txt ( OPENAI_API_KEY and AssistantID )
 
 class parentAgent:
     def __init__(self, name: str, personality: str, tools: dict[str, callable], allData):
