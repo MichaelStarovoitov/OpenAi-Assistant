@@ -69,7 +69,8 @@ class parentAgent:
                 {{
                     "dataProducts":{self.allData.getSortProduct()},
                     "dataContacts":{self.allData.getContacts()},
-                    "dataDelivAndPayment":{self.allData.getDelivAndPay()}
+                    "dataDelivAndPayment":{self.allData.getDelivAndPay()},
+                    "isMore":{self.allData.getIsMore()}
                 }}
             """,
         )
